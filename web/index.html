@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c171d">
+  <title>ATHENA-04 / C4FE CONSOLE</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="id">
+        <span class="logo" aria-hidden="true">✳</span>
+        <div><div class="eyebrow">VERITAS / OBSERVATION NETWORK</div><h1>ATHENA<span class="dim">-04</span></h1></div>
+      </div>
+      <div class="status"><span class="led" id="led"></span><span id="connection">CONNECTING</span></div>
+    </header>
+    <div class="content">
+      <aside class="sidebar">
+        <div class="section-head"><span>REGISTERED NODES <span id="node-count">—</span></span><div class="node-head-actions"><button id="add-node" type="button" title="Register a node" aria-label="Add node">+ ADD</button><button id="reload" type="button" title="Reload" aria-label="Reload nodes">↻</button></div></div>
+        <div id="nodes" class="nodes" aria-live="polite"><div class="muted">Scanning registry...</div></div>
+        <div class="sidefoot">LOCAL REGISTRY ACCESS<br><span>SSH PROBES / READ ONLY</span></div>
+      </aside>
+      <main class="main">
+        <div class="terminal-head"><span>▣ C4FE / OPERATIONS TERMINAL</span><span id="clock"></span></div>
+        <div class="quickbar"><button type="button" data-cmd="status">LOCAL STATUS</button><button type="button" data-cmd="nodes">LIST NODES</button><button type="button" id="scan-all">SCAN ALL</button><button type="button" id="auto-toggle" aria-pressed="true">AUTO ON</button><button type="button" data-cmd="help">HELP</button><button type="button" data-cmd="clear">CLEAR</button></div>
+        <div class="output" id="output" role="log" aria-live="polite" aria-relevant="additions text">
+          <div class="intro">ATHENA-04 / C4FE ENERGY<br><span>Local observation controller initialized.</span><br>Type <b>help</b> to see available commands.</div>
+        </div>
+        <form id="terminal" autocomplete="off"><label for="cmd">athena&gt;</label><input id="cmd" type="text" autofocus spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="status | nodes | inspect demo-linux | telemetry demo-linux"><button type="submit">RUN ↵</button></form>
+      </main>
+    </div>
+    <footer><span>ATHENA-04 / v0.6.2</span><span id="scan-state">AUTO / 60s</span><span>LOCALHOST ONLY</span><span class="energy">C4FE ENERGY ■■■■□□</span></footer>
+  </div>
+  <dialog id="node-dialog" aria-labelledby="dialog-title">
+    <form id="node-form" method="dialog" autocomplete="off">
+      <div class="dialog-bar"><span class="eyebrow">ATHENA-04 / REGISTRY</span><button type="button" id="node-cancel" aria-label="Close dialog">×</button></div>
+      <h2 id="dialog-title">REGISTER NEW NODE</h2>
+      <label for="node-name">Node name</label>
+      <input id="node-name" name="name" required maxlength="80" spellcheck="false" placeholder="homelab-01" pattern="[A-Za-z0-9._-]+">
+      <label for="node-host">Host / IP address</label>
+      <input id="node-host" name="host" required maxlength="253" spellcheck="false" placeholder="192.0.2.10" pattern="[A-Za-z0-9._-]+">
+      <label for="node-user">SSH username</label>
+      <input id="node-user" name="user" required maxlength="64" spellcheck="false" placeholder="operator" pattern="[A-Za-z0-9._-]+">
+      <label for="node-platform">Probe operating system</label>
+      <select id="node-platform" name="platform" required><option value="linux">Linux</option><option value="windows">Windows</option></select>
+      <label class="test-option"><input type="checkbox" id="node-probe"> Check SSH after registration</label>
+      <p class="dialog-hint">Use OS button on an existing node to switch probes without deleting it. Only register machines you administer. SSH host keys must be trusted separately; ATHENA will never auto-accept a new host key. AUTO scanning may check this node later.</p>
+      <p id="node-error" class="dialog-error" role="alert"></p>
+      <div class="dialog-actions"><button type="button" id="node-dismiss">CANCEL</button><button type="submit" id="node-submit">REGISTER NODE</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

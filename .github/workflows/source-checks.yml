@@ -1,0 +1,26 @@
+name: ATHENA-04 source checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  source-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Source and privacy regression checks
+        run: |
+          python3 tools/test-preflight.py
+          python3 tools/preflight-public.py
+          python3 tools/check-probe.py
+          python3 tools/test-probe-structure.py
+      - name: Browser adapter checks
+        run: node tools/test-web.mjs

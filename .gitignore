@@ -1,0 +1,60 @@
+# ATHENA-04: private runtime data and credentials must never be committed.
+# Ignore generated executables and caches.
+/athena
+/athena-web*
+/.build-*/
+/build/
+/result
+/result-*
+*.o
+*.a
+*.exe
+
+# Local node registry, SSH credentials, and host identity.
+**/nodes.tsv
+**/nodes.tsv.*
+**/.ssh/
+**/authorized_keys
+**/administrators_authorized_keys
+**/known_hosts
+**/known_hosts.*
+**/id_ed25519*
+**/id_rsa*
+**/id_ecdsa*
+*.pem
+*.p12
+*.pfx
+*.ppk
+*.key
+*.crt
+
+# Environment, temporary files, crash dumps, and logs.
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.backup
+*.bak
+*.core
+core
+core.*
+**/.config/athena-04/
+**/config.local.*
+
+# Images may expose hostnames, prompts, IP addresses, accounts or SSH keys.
+# Reviewed screenshots can be explicitly added later if needed.
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+screenshots/
+recordings/
+*.zip
+
+# OS, editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
